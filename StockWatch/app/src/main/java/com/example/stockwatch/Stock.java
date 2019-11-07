@@ -7,7 +7,15 @@ public class Stock {
     public double changePer;
     public double changePrice;
 
-    public Stock(String _symbol, String _name, double _price, double _changePer, double _changePrice){
+    public Stock(String _symbol, String _name){
+        symbol      = _symbol;
+        //price       = _price;
+        name        = _name;
+        //changePer   = _changePer;
+        //changePrice = _changePrice;
+    }
+
+    public Stock(String _symbol, String _name, double _price, double _changePrice, double _changePer){
         symbol      = _symbol;
         price       = _price;
         name        = _name;

@@ -19,9 +19,9 @@ public class StockViewHolder extends RecyclerView.ViewHolder{
         Name =         view.findViewById(R.id.stockName);
         Symbol =      view.findViewById(R.id.stockSymbol);
         //these values are going to be constantly updating, no need to set values from other place
-        //Price =  view.findViewById(R.id.currentPrice);
-        //PriceChange = view.findViewById(R.id.dailyPriceChange);
-        //PercentChange = view.findViewById(R.id.dailyPercentChange);
+        Price =  view.findViewById(R.id.currentPrice);
+        PriceChange = view.findViewById(R.id.dailyPriceChange);
+        PercentChange = view.findViewById(R.id.dailyPercentChange);
     }
 
 }
