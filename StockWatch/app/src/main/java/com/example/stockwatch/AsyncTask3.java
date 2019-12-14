@@ -2,7 +2,10 @@ package com.example.stockwatch;
 
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.util.Log;
+
+import androidx.annotation.RequiresApi;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -23,6 +26,7 @@ public class AsyncTask3 extends AsyncTask<String, Void, String> {
         this.mainActivity = mainActivity;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onPostExecute(String s) {
 
@@ -70,9 +74,8 @@ public class AsyncTask3 extends AsyncTask<String, Void, String> {
 
     private Stock parseJSON(String s) {
 
-        Stock toReturn = null;
+        Stock toReturn;
         try {
-            JSONObject jObjMain = new JSONObject();
 
             JSONObject jsonStock = new JSONObject(s);
             String name = jsonStock.getString("companyName");
@@ -80,7 +83,8 @@ public class AsyncTask3 extends AsyncTask<String, Void, String> {
             double price = jsonStock.getDouble("latestPrice");
             double change = jsonStock.getDouble("change");
             double percent = jsonStock.getDouble("changePercent");
-            toReturn = new Stock(symbol, name, price, change, percent);
+            String exchange = jsonStock.getString("primaryExchange");
+            toReturn = new Stock(symbol, name, price, change, percent, exchange);
 
             return toReturn;
         } catch (Exception e) {

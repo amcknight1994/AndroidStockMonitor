@@ -53,9 +53,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockViewHolder> {
                 holder.Symbol.setTextColor(Color.RED);
                 holder.PercentChange.setTextColor(Color.RED);
             }
-
         }
-
 
         @Override
         public int getItemCount() {

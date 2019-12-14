@@ -1,13 +1,9 @@
 package com.example.stockwatch;
 
 import android.annotation.SuppressLint;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -15,14 +11,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 
 public class AsyncTask2 extends AsyncTask<String, Void, String> {
     private static final String TAG = "API_AsyncTask";
     @SuppressLint("StaticFieldLeak")
     private MainActivity mainActivity;
-
-    private JSONArray allResults = new JSONArray();
 
 
     AsyncTask2(MainActivity mainActivity) {
@@ -76,9 +69,8 @@ public class AsyncTask2 extends AsyncTask<String, Void, String> {
 
     private Stock parseJSON(String s) {
 
-        Stock toReturn = null;
+        Stock toReturn;
         try {
-            JSONObject jObjMain = new JSONObject();
 
                 JSONObject jsonStock = new JSONObject(s);
                 String name = jsonStock.getString("companyName");
@@ -86,7 +78,8 @@ public class AsyncTask2 extends AsyncTask<String, Void, String> {
                 double price = jsonStock.getDouble("latestPrice");
                 double change = jsonStock.getDouble("change");
                 double percent = jsonStock.getDouble("changePercent");
-                toReturn = new Stock(symbol, name, price, change, percent);
+                String exchange = jsonStock.getString("primaryExchange");
+                toReturn = new Stock(symbol, name, price, change, percent, exchange);
 
             return toReturn;
         } catch (Exception e) {

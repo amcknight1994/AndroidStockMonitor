@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -50,11 +51,6 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
     private SwipeRefreshLayout swiper;
 
 
-    Comparator<Stock> c = new Comparator<Stock>() {
-        public int compare(Stock x, Stock y) {
-            return x.symbol.compareTo(y.symbol);
-        }
-    };
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
                 stockJSON.put("price", n.price);
                 stockJSON.put("change", n.changePrice);
                 stockJSON.put("perChange", n.changePer);
+                stockJSON.put("exchange", n.primaryEx);
                 jsonArray.put(stockJSON);
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -176,7 +173,8 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
                         double price = jsonObject.getDouble("price");
                         double change = jsonObject.getDouble("change");
                         double percent = jsonObject.getDouble("perChange");
-                        Stock n = new Stock(symbol, name, price, change, percent);
+                        String exchange = jsonObject.getString("exchange");
+                        Stock n = new Stock(symbol, name, price, change, percent, exchange);
                         Stocks.add(n);
                     }
 
@@ -294,8 +292,18 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
 
 
     public void onClick(View view) {
-        //opens web page to this stock symbol
+        String URL = "https://www.tradingview.com/symbols/";
+        final int pos = recyclerView.getChildLayoutPosition(view);
+        Stock thisStock = Stocks.get(pos);
+        String symbol = thisStock.symbol;
+        String exchange = thisStock.primaryEx;
+        String exchangeAbb = "";
+        if (exchange.equals("New York Stock Exchange")) exchangeAbb = "NYSE";
+        if (exchange.equals("NASDAQ")) exchangeAbb = exchange;
 
+        Uri url = Uri.parse(URL + exchangeAbb + "-" + symbol);
+        Intent intent = new Intent(Intent.ACTION_VIEW, url);
+        startActivity(intent);
     }
 
 
@@ -357,9 +365,7 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
 
                 stockAdapter.notifyDataSetChanged();
             }
-
     }
-
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void acceptUpdatedResults(Stock result) {
@@ -382,10 +388,7 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
                 index++;
             }
             Stocks.add(index, result);
-
             stockAdapter.notifyDataSetChanged();
-
         }
-
     }
 }
