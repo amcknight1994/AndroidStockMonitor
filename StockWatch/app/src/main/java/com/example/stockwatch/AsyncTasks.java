@@ -1,13 +1,10 @@
 package com.example.stockwatch;
 
-import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -23,7 +20,6 @@ public class AsyncTasks extends AsyncTask<String, Void, String> {
 
     private static final String DATA_URL =
             "https://api.iextrading.com/1.0/ref-data/symbols";
-
 
     private static final String TAG = "AsyncSymbolLoader";
 

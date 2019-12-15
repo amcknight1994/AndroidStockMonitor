@@ -1,6 +1,8 @@
 package com.example.stockwatch;
 
-public class Stock {
+import java.io.Serializable;
+
+public class Stock implements Serializable {
     public String symbol;
     public String name;
     public double price;
