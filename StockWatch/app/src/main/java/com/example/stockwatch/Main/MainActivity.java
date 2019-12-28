@@ -24,9 +24,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.stockwatch.AsyncTasks.AsyncTask1;
 import com.example.stockwatch.AsyncTasks.AsyncTask2;
 import com.example.stockwatch.AsyncTasks.AsyncTask3;
-import com.example.stockwatch.AsyncTasks.AsyncTasks;
 import com.example.stockwatch.R;
 import com.example.stockwatch.Stock.Stock;
 import com.example.stockwatch.Stock.StockAdapter;
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
                 doRefresh();
             }
         });
-        new AsyncTasks(this).execute();
+        new AsyncTask1(this).execute();
 
     }
 
