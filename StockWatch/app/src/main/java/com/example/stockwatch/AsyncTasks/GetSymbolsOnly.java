@@ -17,7 +17,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class AsyncTask1 extends AsyncTask<String, Void, String> {
+public class GetSymbolsOnly extends AsyncTask<String, Void, String> {
 
     private MainActivity mainActivity;
 
@@ -26,7 +26,7 @@ public class AsyncTask1 extends AsyncTask<String, Void, String> {
 
     private static final String TAG = "AsyncSymbolLoader";
 
-    public AsyncTask1(MainActivity ma) {
+    public GetSymbolsOnly(MainActivity ma) {
         mainActivity = ma;
     }
 

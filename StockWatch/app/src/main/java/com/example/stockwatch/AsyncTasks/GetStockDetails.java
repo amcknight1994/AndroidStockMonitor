@@ -15,13 +15,13 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class AsyncTask2 extends AsyncTask<String, Void, String> {
+public class GetStockDetails extends AsyncTask<String, Void, String> {
     private static final String TAG = "API_AsyncTask";
     @SuppressLint("StaticFieldLeak")
     private MainActivity mainActivity;
 
 
-    public AsyncTask2(MainActivity mainActivity) {
+    public GetStockDetails(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
     }
 
